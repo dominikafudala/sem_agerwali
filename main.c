@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define P 14 //ilosc procesow
+#define P 5 //ilosc procesow
 #define MAX 10 //ilosc buforow
 #define MAX2 12 //dwa ostatni indeks na wskaznik zapisu
 #define SEM_NUM 3 //ilosc semaforow

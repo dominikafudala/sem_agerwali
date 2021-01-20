@@ -9,10 +9,10 @@
 #define MAX 10 //ilosc buforow
 #define MAX2 12 //dwa ostatnie indeksy na wskazniki odczytu i zapisu
 #define SEM_NUM 3
-#define odczyt pam[MAX] 
 #define WRITE_SEM 0
 #define READ_SEM 2
 #define MUTEX_SEM 1
+#define odczyt pam[MAX]
 
 int main()
 {
@@ -52,18 +52,18 @@ int main()
 
     tab1[0] = MUTEX_SEM;
     tab2[0] = WRITE_SEM;
-    waitSemaforPE(semID, tab1, 1, tab2, 1);
+    waitSemaforPE(semID, tab1, 1, tab2, 1);//wait(mutex, write)
 
     tab1[0] = MUTEX_SEM; 
     tab1[1] = READ_SEM;
-    signalSemaforVE(semID, tab1, 2);
+    signalSemaforVE(semID, tab1, 2);//signal(mutex, read)
     
     //odczyt
-    printf("CZYTACZ pam[%d]: %d\n", odczyt, pam[odczyt]);
-    odczyt = (odczyt+1)%MAX;
+    printf("CZYTELNIK pam[%d]: %d\n", odczyt, pam[odczyt]);
+    odczyt=(odczyt + 1) % MAX;
     
     tab1[0]=READ_SEM;
-    waitSemaforPE(semID, tab1, 1, tab2, 0);
+    waitSemaforPE(semID, tab1, 1, tab2, 0);//wait(read)
 
     //exit(0);
 }

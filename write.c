@@ -71,5 +71,6 @@ int main()
     tab1[0]= WRITE_SEM;
     waitSemaforPE(semID, tab1,1, tab2, 0); //wait(write)
 
+
     exit(0);
 }

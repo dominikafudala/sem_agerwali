@@ -9,10 +9,10 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define P 5 //ilosc procesow
+#define P 13 //ilosc procesow
 #define MAX 10 //ilosc buforow
 #define MAX2 12 //dwa ostatni indeks na wskaznik zapisu
-#define SEM_NUM 3 //ilosc semaforow
+#define SEM_NUM 4 //ilosc semaforow
 #define WRITE_SEM 0
 #define READ_SEM 2
 #define MUTEX_SEM 1
@@ -20,7 +20,7 @@
 int main()
 {
     key_t kluczSemafor, kluczPamiec;
-    int semID, shmID; 
+    int semID, shmID, semczytID;
     int i;
 
     //tworzenie zestawu semaforow
@@ -37,8 +37,9 @@ int main()
     }
 
     inicjalizujSemafor(semID, WRITE_SEM, 0); // A
-    inicjalizujSemafor(semID, MUTEX_SEM, 1); // R
-    inicjalizujSemafor(semID, READ_SEM, 0); // M
+    inicjalizujSemafor(semID, MUTEX_SEM, 1); // M
+    inicjalizujSemafor(semID, READ_SEM, 0); // R
+    inicjalizujSemafor(semID, 3, 1); // semafor czytelnik
     
     //tworzenie pamieci dzielonej
     if((kluczPamiec = ftok(".", 'B')) == -1)

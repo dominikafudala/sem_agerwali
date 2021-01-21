@@ -59,8 +59,11 @@ int main()
     signalSemaforVE(semID, tab1, 2);//signal(mutex, read)
     
     //odczyt
+    waitSemafor(semID, 3, 0);
     printf("CZYTELNIK pam[%d]: %d\n", odczyt, pam[odczyt]);
     odczyt=(odczyt + 1) % MAX;
+    signalSemafor(semID, 3);
+
     
     tab1[0]=READ_SEM;
     waitSemaforPE(semID, tab1, 1, tab2, 0);//wait(read)
